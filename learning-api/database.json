@@ -1,0 +1,265 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "Alice Johnson",
+            "email": "alice.johnson@example.com",
+            "cohortId": 67
+        },
+        {
+            "id": 2,
+            "name": "Bob Smith",
+            "email": "bob.smith@example.com",
+            "cohortId": 64
+        },
+        {
+            "id": 3,
+            "name": "Charlie Brown",
+            "email": "charlie.brown@example.com",
+            "cohortId": 65
+        },
+        {
+            "id": 4,
+            "name": "David Wilson",
+            "email": "david.wilson@example.com",
+            "cohortId": 61
+        },
+        {
+            "id": 5,
+            "name": "Eva Davis",
+            "email": "eva.davis@example.com",
+            "cohortId": 65
+        },
+        {
+            "id": 6,
+            "name": "Frank Martinez",
+            "email": "frank.martinez@example.com",
+            "cohortId": 66
+        },
+        {
+            "id": 7,
+            "name": "Grace Miller",
+            "email": "grace.miller@example.com",
+            "cohortId": 67
+        }
+    ],
+    "posts": [
+        {
+            "id": 1,
+            "title": "Understanding Variables",
+            "body": "Variables are used to store data in JavaScript.",
+            "date": "5/15/2022",
+            "userId": 1,
+            "topicId": 1
+        },
+        {
+            "id": 2,
+            "title": "Conditional Statements",
+            "body": "if, else if, and else are used for decision-making in JavaScript.",
+            "date": "6/20/2022",
+            "userId": 2,
+            "topicId": 2
+        },
+        {
+            "id": 3,
+            "title": "Functions in JavaScript",
+            "body": "Functions allow you to encapsulate and reuse code.",
+            "date": "7/5/2022",
+            "userId": 3,
+            "topicId": 3
+        },
+        {
+            "id": 4,
+            "title": "Arrays and Loops",
+            "body": "Arrays and loops are fundamental for working with collections of data.",
+            "date": "8/10/2022",
+            "userId": 4,
+            "topicId": 4
+        },
+        {
+            "id": 5,
+            "title": "Objects and Properties",
+            "body": "Objects are key-value pairs used to represent complex data.",
+            "date": "9/15/2022",
+            "userId": 5,
+            "topicId": 5
+        },
+        {
+            "id": 6,
+            "title": "Event Handling",
+            "body": "Events and event handlers enable interactivity in web applications.",
+            "date": "10/20/2022",
+            "userId": 6,
+            "topicId": 6
+        },
+        {
+            "id": 7,
+            "title": "DOM Manipulation",
+            "body": "The Document Object Model allows you to modify HTML and CSS.",
+            "date": "11/5/2022",
+            "userId": 7,
+            "topicId": 7
+        },
+        {
+            "id": 8,
+            "title": "Error Handling",
+            "body": "Try-catch blocks help handle errors gracefully in JavaScript.",
+            "date": "12/10/2022",
+            "userId": 1,
+            "topicId": 7
+        },
+        {
+            "id": 9,
+            "title": "Closures and Scope",
+            "body": "Closures control variable access and scope in JavaScript.",
+            "date": "1/15/2023",
+            "userId": 2,
+            "topicId": 8
+        },
+        {
+            "id": 10,
+            "title": "Promises and Callbacks",
+            "body": "Promises and callbacks manage asynchronous operations.",
+            "date": "2/20/2023",
+            "userId": 3,
+            "topicId": 9
+        },
+        {
+            "id": 11,
+            "title": "ES6 Features",
+            "body": "ES6 introduced new features like arrow functions and classes.",
+            "date": "3/5/2023",
+            "userId": 4,
+            "topicId": 8
+        },
+        {
+            "id": 12,
+            "title": "Debugging Techniques",
+            "body": "Debugging tools help identify and fix code issues.",
+            "date": "4/10/2023",
+            "userId": 5,
+            "topicId": 9
+        },
+        {
+            "id": 13,
+            "title": "AJAX and Fetch API",
+            "body": "AJAX and Fetch allow you to make asynchronous requests.",
+            "date": "5/15/2023",
+            "userId": 6,
+            "topicId": 10
+        },
+        {
+            "id": 14,
+            "title": "ESLint and Code Quality",
+            "body": "ESLint checks code for consistency and errors.",
+            "date": "6/20/2023",
+            "userId": 7,
+            "topicId": 11
+        },
+        {
+            "id": 15,
+            "title": "Module System",
+            "body": "JavaScript modules help organize and modularize code.",
+            "date": "7/5/2023",
+            "userId": 1,
+            "topicId": 12
+        }
+    ],
+    "topics": [
+        {
+            "id": 1,
+            "name": "Variables"
+        },
+        {
+            "id": 2,
+            "name": "Control Flow"
+        },
+        {
+            "id": 3,
+            "name": "Functions"
+        },
+        {
+            "id": 4,
+            "name": "Arrays and Loops"
+        },
+        {
+            "id": 5,
+            "name": "Objects and Properties"
+        },
+        {
+            "id": 6,
+            "name": "Event Handling"
+        },
+        {
+            "id": 7,
+            "name": "DOM Manipulation"
+        },
+        {
+            "id": 8,
+            "name": "Closures and Scope"
+        },
+        {
+            "id": 9,
+            "name": "Promises and Callbacks"
+        },
+        {
+            "id": 10,
+            "name": "ES6 Features"
+        },
+        {
+            "id": 11,
+            "name": "Debugging Techniques"
+        },
+        {
+            "id": 12,
+            "name": "AJAX and Fetch API"
+        }
+    ],
+    "userLikes": [
+        {
+          "id": 1,
+          "postId": 1,
+          "userId": 2
+        },
+        {
+          "id": 2,
+          "postId": 1,
+          "userId": 4
+        },
+        {
+          "id": 3,
+          "postId": 2,
+          "userId": 3
+        },
+        {
+          "id": 4,
+          "postId": 2,
+          "userId": 7
+        },
+        {
+          "id": 5,
+          "postId": 3,
+          "userId": 1
+        },
+        {
+          "id": 6,
+          "postId": 4,
+          "userId": 6
+        },
+        {
+          "id": 7,
+          "postId": 5,
+          "userId": 2
+        },
+        {
+          "id": 8,
+          "postId": 5,
+          "userId": 3
+        },
+        {
+          "id": 9,
+          "postId": 5,
+          "userId": 5
+        }
+      ]
+}
