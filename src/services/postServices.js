@@ -5,3 +5,7 @@ export const getallPosts = () => {
 export const getAllUserLikes = () => {
     return fetch('http://localhost:8088/userLikes?_expand=user&_expand=post').then(res => res.json())
 }
+
+export const getAllTopics = () => {
+    return fetch('http://localhost:8088/topics').then(res => res.json())
+}
