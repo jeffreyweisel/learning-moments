@@ -10,6 +10,7 @@ export const PostList = () => {
     const [filteredPosts, setFilteredPosts] = useState([])
     const [allTopics, setAllTopics] = useState([])
     const [selectedTopic, setSelectedTopic] = useState("")
+    const [filteredTopics, setFilteredtopics] = useState([])
 
 
 
@@ -51,24 +52,29 @@ export const PostList = () => {
     }, [])
 
 
-    // useEffect to filter posts based on selectedTopic
-    useEffect(() => {
-        const filteredTopics = allTopics.filter((topic) =>
-            allPosts.find((post) => post.topicId === topic.id))
-        setSelectedTopic(filteredTopics)
-        console.log(filteredTopics)
+    // // useEffect for filtering posts based on the selected topic.
+    // useEffect(() => {
+    //     if (selectedTopic) {
+    //         const foundPosts = allPosts.filter((post) => post.topicId === selectedTopic)
+    //         setFilteredPosts(foundPosts)
+    //     } else {
+    //         // If no topic is selected, show all posts.
+    //         setFilteredPosts(allPosts)
+    //     }
+    // }, [selectedTopic, allPosts])
 
-    }, [allPosts, allTopics])
 
-   
-
-    useEffect(() => {
-        console.log("selected topic", selectedTopic) 
-        // console.log("all posts", allPosts)
-        // console.log("all topiccsssss",allTopics)
-    
-    }, [selectedTopic])
-
+    const handleTopicChange = (selectedTopic) => {
+        if (selectedTopic) {
+            const foundPosts = allPosts.some((post) => post.topicId === selectedTopic)
+            console.log(foundPosts)
+            setAllPosts(foundPosts)
+            
+        } else {
+            // If no topic is selected, show all posts.
+            setAllPosts(allPosts)
+        }
+    }
 
     return (
         <div className="post-hdr">
@@ -80,18 +86,18 @@ export const PostList = () => {
                     }}
                     type="text"
                     placeholder="Search Posts"
-                    className="post-search"
+                    className="post-input"
                 />
             </div>
             {/* the dropdown selector */}
             <div className="post-search">
                 <select
                     onChange={(event) => {
-                        setSelectedTopic(event.target.value)
+                        handleTopicChange(event.target.value)
                         // console.log(selectedTopic) 
                     }}
                     value={selectedTopic}
-                    className="post-search"
+                    className="post-select"
                 >
                     <option value="">Select a topic</option>
                     {allTopics.map((topic) => (
