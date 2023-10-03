@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-import { getAllTopics, getallPosts } from "../../services/postServices"
+import { getallPosts, getAllTopics, getAllUserLikes } from "../../services/postServices"
 import "./Posts.css"
-import { getAllUserLikes } from "../../services/postServices"
+
 
 export const PostList = () => {
     const [allPosts, setAllPosts] = useState([])
@@ -10,74 +10,62 @@ export const PostList = () => {
     const [filteredPosts, setFilteredPosts] = useState([])
     const [allTopics, setAllTopics] = useState([])
     const [selectedTopic, setSelectedTopic] = useState("")
-    const [filteredTopics, setFilteredtopics] = useState([])
-
-
-
-    //useEffect for allPosts and filteredPosts
+    
+    
     useEffect(() => {
         getallPosts().then((postsArray) => {
             setAllPosts(postsArray)
             setFilteredPosts(postsArray)
         })
     }, [])
-
-    //useEfffect for post likes
+   
+    // useEffect for post likes
     useEffect(() => {
         getAllUserLikes().then((likesArray) => {
-            //filter userLikes to find matching id to post id
-            const postLikes = likesArray.filter((like) =>
-                allPosts.find((post) => post.id === like.postId)
-            )
-            setAllLikes(postLikes)
+            setAllLikes(likesArray)
         })
 
-    }, [allPosts])
-
-
-    //useEffect for search bar
+    }, [])
+   
+    // useEffect for search bar
     useEffect(() => {
-        const foundPosts = allPosts.filter((post) => post.title.toLowerCase().includes(searchTerm.toLowerCase()))
-        setFilteredPosts(foundPosts)
+        if (searchTerm.length > 0) {
+            const foundPosts = allPosts.filter((post) => post.title.toLowerCase().includes(searchTerm.toLowerCase()))
+            setFilteredPosts(foundPosts)
+        }
 
     }, [searchTerm, allPosts])
-
-
+   
+   
     useEffect(() => {
-        //fetch all topics
+        // Fetch all topics
         getAllTopics().then((topicsArray) => {
             setAllTopics(topicsArray)
         })
 
     }, [])
-
-
-    // // useEffect for filtering posts based on the selected topic.
-    // useEffect(() => {
-    //     if (selectedTopic) {
-    //         const foundPosts = allPosts.filter((post) => post.topicId === selectedTopic)
-    //         setFilteredPosts(foundPosts)
-    //     } else {
-    //         // If no topic is selected, show all posts.
-    //         setFilteredPosts(allPosts)
-    //     }
-    // }, [selectedTopic, allPosts])
-
-
-    const handleTopicChange = (selectedTopic) => {
+    
+    // useEffect for filtering posts based on the selected topic.
+    useEffect(() => {
         if (selectedTopic) {
-            const foundPosts = allPosts.some((post) => post.topicId === selectedTopic)
+            const foundPosts = allPosts.filter((post) => post.topicId == selectedTopic)
             console.log(foundPosts)
-            setAllPosts(foundPosts)
-            
+            setFilteredPosts(foundPosts)
         } else {
-            // If no topic is selected, show all posts.
-            setAllPosts(allPosts)
+            //if no topic is selected, show all posts.
+            setFilteredPosts(allPosts)
         }
-    }
 
+    }, [selectedTopic, allPosts])
+    
+    
+    
     return (
         <div className="post-hdr">
+            <div>
+                <h1 className="post-h1">All Posts</h1>
+            </div>
+            <div className="filter-bar">
             {/* the search bar  */}
             <div className="post-search">
                 <input
@@ -93,8 +81,8 @@ export const PostList = () => {
             <div className="post-search">
                 <select
                     onChange={(event) => {
-                        handleTopicChange(event.target.value)
-                        // console.log(selectedTopic) 
+                        setSelectedTopic(event.target.value)
+                        // console.log(selectedTopic)
                     }}
                     value={selectedTopic}
                     className="post-select"
@@ -108,11 +96,13 @@ export const PostList = () => {
                     ))}
                 </select>
             </div>
+            </div>
             <div className="post-container">
-                {filteredPosts.map((post) => {
+                {filteredPosts.length > 0 ? filteredPosts.map((post) => {
+                    console.log(post)
                     //count the number of likes for each post
                     const postLikeCount = allLikes.filter((like) => like.postId === post.id)
-
+                    
                     return (
                         <div key={post.id} className="posts">
                             <div className="post-hdr">
@@ -122,12 +112,8 @@ export const PostList = () => {
                             <div className="post-info">{postLikeCount.length} likes</div>
                         </div>
                     )
-                })}
+                }) : null}
             </div>
         </div>
     )
 }
-
-
-
-
