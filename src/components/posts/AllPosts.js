@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react"
-import { getallPosts, getAllTopics, getAllUserLikes } from "../../services/postServices"
+import { addUserLike, getallPosts, getAllTopics, getAllUserLikes } from "../../services/postServices"
 import "./Posts.css"
 import { Link } from "react-router-dom"
 
 
-export const PostList = () => {
+
+export const PostList = ({ currentUser, post}) => {
     const [allPosts, setAllPosts] = useState([])
     const [allLikes, setAllLikes] = useState([])
     const [searchTerm, setSearchTerm] = useState("")
@@ -13,11 +14,18 @@ export const PostList = () => {
     const [selectedTopic, setSelectedTopic] = useState("")
 
 
-    useEffect(() => {
+
+    
+    
+    const getData = () => {
         getallPosts().then((postsArray) => {
             setAllPosts(postsArray)
             setFilteredPosts(postsArray)
         })
+    }
+    useEffect(() => {
+        getData()
+
     }, [])
 
     // useEffect for post likes
@@ -50,7 +58,7 @@ export const PostList = () => {
     useEffect(() => {
         if (selectedTopic) {
             const foundPosts = allPosts.filter((post) => post.topicId == selectedTopic)
-            console.log(foundPosts)
+            // console.log(foundPosts)
             setFilteredPosts(foundPosts)
         } else {
             //if no topic is selected, show all posts.
@@ -59,6 +67,28 @@ export const PostList = () => {
 
     }, [selectedTopic, allPosts])
 
+
+    
+
+    const handleLike = (postObj) => {
+       
+        const postInfo = {
+           userId: currentUser.id,
+           postId: postObj.id
+        }
+ 
+        addUserLike(postInfo)
+        getAllUserLikes()
+        getData()
+        
+ 
+     }
+        
+
+
+    const handlePostEdit = () => {
+        console.log("edit")
+    }
 
 
     return (
@@ -80,7 +110,7 @@ export const PostList = () => {
                     <select
                         onChange={(event) => {
                             setSelectedTopic(event.target.value)
-                            // console.log(selectedTopic)
+
                         }}
                         value={selectedTopic}
                         className="post-select"
@@ -95,24 +125,44 @@ export const PostList = () => {
                     </select>
                 </div>
             </div>
-            <div className="post-container">
-                {filteredPosts.map((post) => {
-                    console.log(post)
+            <div className="post-container" >
+                {filteredPosts.map((postObj) => {
+                        console.log(postObj.id)
                     //count the number of likes for each post
-                    const postLikeCount = allLikes.filter((like) => like.postId === post.id)
+                    const postLikeCount = allLikes.filter((like) => like.postId === postObj.id)
 
                     return (
-                        <Link to={`/allposts/${post.id}`} key={post.id}><div key={post.id} className="posts" userLikes={postLikeCount}>
-                            <div className="post-hdr">
-                                <div className="post-info post-title">{post.title}</div>
-                            </div>
-                            <div className="post-info post-body">{post.body}</div>
-                            <div className="post-info">{postLikeCount.length} likes</div>
+                        <div className="posts" post={postObj.id} key={postObj.id}><div>
+
+                            <Link to={`/allposts/${postObj.id}`}> <div className="post-info post-title">{postObj.title}</div>
+                            </Link>
                         </div>
-                    </Link>
+                            <div className="post-info post-body">{postObj.body}</div>
+                            <div className="post-info">{postLikeCount.length} likes</div>
+                            <div className="btn-container">
+                                {currentUser.id !== postObj.userId ? (<button
+                                    className="btn btn-secondary"
+                                    onClick={() => handleLike(postObj)}
+                                >Like</button>) : ""
+                                }
+                                {currentUser.id === postObj.userId ? (<button
+                                    className="btn btn-primary"
+                                    onClick={handlePostEdit}
+                                >Edit</button>) : ""
+                                }
+                            </div>
+                        </div>
+
                     )
                 })}
             </div>
         </div>
     )
 }
+
+
+
+
+
+
+

@@ -42,8 +42,10 @@ export const ApplicationViews = () => {
                     <Route path=":postId" element={< PostDetails />} />
                 </Route>
       
-                <Route path="profile" element={"this doesnt do anything yet muthafucca"}/>
-                <Route path="newpost" element={"this doesnt do anything yet muthafucca"}/>
+                <Route path="profile" element={"this doesnt do anything yet "}/>
+                <Route path="newpost" element={"this doesnt do anything yet "}/>
+                <Route path="favorites" element={"this doesnt do anything yet "}/>
+                <Route path="myposts" element={"this doesnt do anything yet "}/>
             </Route>
         </Routes>
     </>
