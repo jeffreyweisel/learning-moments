@@ -1,4 +1,6 @@
-
+export const getPosts = () => {
+    return fetch('http://localhost:8088/posts').then(res => res.json())
+}
 
 export const getallPosts = () => {
     return fetch('http://localhost:8088/posts?_expand=topic&_expand=user').then(res => res.json())
@@ -24,6 +26,27 @@ export const addUserLike = (postObj) => {
         },
         body: JSON.stringify(postObj),
     }).then((res) => res.json())
-
-
 }
+
+export const addNewPost = (newPost) => {
+    return fetch ('http://localhost:8088/posts' , {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+
+        },
+        body: JSON.stringify(newPost)
+    }).then((res) => res.json())
+}
+
+export const deletePost = (postObj) => {
+    return fetch (`http://localhost:8088/posts/${postObj.id}` , {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+
+        }
+        
+    })
+}
+

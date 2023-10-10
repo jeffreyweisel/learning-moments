@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 
 
 
-export const PostList = ({ currentUser, post}) => {
+export const PostList = ({ currentUser, post }) => {
     const [allPosts, setAllPosts] = useState([])
     const [allLikes, setAllLikes] = useState([])
     const [searchTerm, setSearchTerm] = useState("")
@@ -15,8 +15,8 @@ export const PostList = ({ currentUser, post}) => {
 
 
 
-    
-    
+
+
     const getData = () => {
         getallPosts().then((postsArray) => {
             setAllPosts(postsArray)
@@ -68,22 +68,21 @@ export const PostList = ({ currentUser, post}) => {
     }, [selectedTopic, allPosts])
 
 
-    
+
 
     const handleLike = (postObj) => {
-       
+
         const postInfo = {
-           userId: currentUser.id,
-           postId: postObj.id
+            userId: currentUser.id,
+            postId: postObj.id
         }
- 
+
         addUserLike(postInfo)
-        getAllUserLikes()
-        getData()
         
- 
-     }
-        
+
+
+    }
+
 
 
     const handlePostEdit = () => {
@@ -127,12 +126,12 @@ export const PostList = ({ currentUser, post}) => {
             </div>
             <div className="post-container" >
                 {filteredPosts.map((postObj) => {
-                        console.log(postObj.id)
+                    console.log(postObj.id)
                     //count the number of likes for each post
                     const postLikeCount = allLikes.filter((like) => like.postId === postObj.id)
 
                     return (
-                        <div className="posts" post={postObj.id} key={postObj.id}><div>
+                        <div className="posts" post={postObj} key={postObj.id}><div>
 
                             <Link to={`/allposts/${postObj.id}`}> <div className="post-info post-title">{postObj.title}</div>
                             </Link>

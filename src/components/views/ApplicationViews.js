@@ -4,6 +4,8 @@ import { NavBar } from "../nav/NavBar"
 import { useEffect, useState } from "react"
 import { PostDetails } from "../posts/PostDetails"
 import { Welcome } from "../welcome/Welcome"
+import { NewPostForm } from "../forms/NewPostForm"
+import { MyPosts } from "../posts/MyPosts"
 
 
 
@@ -43,9 +45,9 @@ export const ApplicationViews = () => {
                 </Route>
       
                 <Route path="profile" element={"this doesnt do anything yet "}/>
-                <Route path="newpost" element={"this doesnt do anything yet "}/>
+                <Route path="newpost" element={< NewPostForm currentUser={currentUser} />}/>
                 <Route path="favorites" element={"this doesnt do anything yet "}/>
-                <Route path="myposts" element={"this doesnt do anything yet "}/>
+                <Route path="myposts" element={< MyPosts currentUser={currentUser}/>}/>
             </Route>
         </Routes>
     </>
