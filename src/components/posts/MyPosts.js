@@ -24,8 +24,13 @@ export const MyPosts = ( { currentUser}) => {
     }, [posts, currentUser.id])
 
 
-    const handleDelete = () => {
-        console.log('working')
+    const handleDelete = (postObj) => {
+        deletePost(postObj).then(res => res.json())
+        .then(() => {
+            const updatedMyPosts = myPosts.filter((post) => post.id !== postObj.id) //includes all posts from myPosts except the one that matches the postObj.id that was deleted
+            setMyPosts(updatedMyPosts)
+        })
+        
     }
     
     
@@ -43,7 +48,8 @@ export const MyPosts = ( { currentUser}) => {
                         <div className="btn-container">
                                 {currentUser.id === postObj.userId ? (<button
                                     className="btn btn-warning"
-                                    onClick={handleDelete}
+                                    onClick={() => handleDelete(postObj)}
+                                    
                                 >Delete</button>) : ""
                                 }
                             </div>

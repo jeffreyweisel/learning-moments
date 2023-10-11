@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react"
 import { addUserLike, getallPosts, getAllTopics, getAllUserLikes } from "../../services/postServices"
 import "./Posts.css"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 
 
 export const PostList = ({ currentUser, post }) => {
+    
+    const navigate = useNavigate()
+    
     const [allPosts, setAllPosts] = useState([])
     const [allLikes, setAllLikes] = useState([])
     const [searchTerm, setSearchTerm] = useState("")
@@ -77,7 +80,9 @@ export const PostList = ({ currentUser, post }) => {
             postId: postObj.id
         }
 
-        addUserLike(postInfo)
+        addUserLike(postInfo).then(() => {
+            navigate(`/favorites`)
+        })
         
 
 

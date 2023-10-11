@@ -39,7 +39,6 @@ export const NewPostForm = ({ currentUser }) => {
         event.preventDefault()
         console.log('Clicked')
 
-
         addNewPost(newPost).then(() => {
             navigate(`/myposts`)
         })
@@ -48,10 +47,11 @@ export const NewPostForm = ({ currentUser }) => {
 
     // Update topicId in newPost when the user selects a topic
     useEffect(() => {
-        setNewPost({...newPost,
+        setNewPost({
+            ...newPost,
             topicId: parseInt(selectedTopic)      //spread operator to change topicId on onChange 
         })
-    }, [selectedTopic]) 
+    }, [selectedTopic])
 
 
     return (

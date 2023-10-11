@@ -39,8 +39,8 @@ export const addNewPost = (newPost) => {
     }).then((res) => res.json())
 }
 
-export const deletePost = (postObj) => {
-    return fetch (`http://localhost:8088/posts/${postObj.id}` , {
+export const deletePost = (post) => {
+    return fetch (`http://localhost:8088/posts/${post.id}` , {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
