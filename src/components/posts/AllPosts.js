@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom"
 
 
 
-export const PostList = ({ currentUser, post }) => {
+export const PostList = ({ currentUser }) => {
     
     const navigate = useNavigate()
     
@@ -89,12 +89,6 @@ export const PostList = ({ currentUser, post }) => {
     }
 
 
-
-    const handlePostEdit = () => {
-        console.log("edit")
-    }
-
-
     return (
         <div className="post-hdr">
             <div className="filter-bar">
@@ -134,6 +128,7 @@ export const PostList = ({ currentUser, post }) => {
                     console.log(postObj.id)
                     //count the number of likes for each post
                     const postLikeCount = allLikes.filter((like) => like.postId === postObj.id)
+                   
 
                     return (
                         <div className="posts" post={postObj} key={postObj.id}><div>
@@ -144,14 +139,16 @@ export const PostList = ({ currentUser, post }) => {
                             <div className="post-info post-body">{postObj.body}</div>
                             <div className="post-info">{postLikeCount.length} likes</div>
                             <div className="btn-container">
-                                {currentUser.id !== postObj.userId ? (<button
+                                {currentUser.id !== postObj.userId  ? (<button
                                     className="btn btn-secondary"
                                     onClick={() => handleLike(postObj)}
                                 >Like</button>) : ""
                                 }
                                 {currentUser.id === postObj.userId ? (<button
                                     className="btn btn-primary"
-                                    onClick={handlePostEdit}
+                                    onClick={() => {
+                                        navigate("/allposts/edit/"+ postObj.id, {postObj})
+                                    }}
                                 >Edit</button>) : ""
                                 }
                             </div>

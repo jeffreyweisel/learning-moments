@@ -16,24 +16,24 @@ export const PostDetails = () => {
         })
     }, [postId])
 
-    return <section className="post">
-        <header className="post-header"> {post.user?.name}</header>
-        <div>
-            <span className="posts-info"> Title: </span>
+    return <div className="posts">
+        <header className="posts-info post-body post-header"> {post.user?.name}</header>
+        <div className="posts-info post-body">
+            <span> Title: </span>
             {post.title}
         </div>
-        <div>
-            <span className="posts-info"> Body: </span>
+        <div className="posts-info post-body">
+            <span> Body: </span>
             {post.body}
         </div>
-        <div>
-            <span className="posts-info"> Date: </span>
+        <div className="posts-info post-body">
+            <span> Date: </span>
             {post.date}
         </div>
-        <footer className="employee-footer">
+        <footer className="posts-info post-body post-footer">
 
              {post.userLikes?.length} likes
         </footer>
         
-    </section>
+    </div>
 }
